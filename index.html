@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="RECCESSARY 綠色韌性活動 LinkedIn 講者貼文產生器"
+    />
+    <title>RECCESSARY｜LinkedIn 講者貼文產生器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="回到頁面頂端">
+        <span class="brand-mark">RΞCCESSARY</span>
+        <span class="brand-divider"></span>
+        <span class="brand-product">Speaker Studio</span>
+      </a>
+      <span class="status-pill"><i></i> 2026 Bangkok Seminar</span>
+    </header>
+
+    <main class="app-shell">
+      <section class="editor-panel" aria-labelledby="editor-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LINKEDIN POST GENERATOR</p>
+            <h1 id="editor-title">製作你的講者專屬貼文</h1>
+            <p>上傳頭貼、確認講題，切換語言後即可下載或分享。</p>
+          </div>
+          <button class="icon-button" id="resetButton" type="button" title="重設內容">
+            ↺
+          </button>
+        </div>
+
+        <div class="language-switch" role="group" aria-label="貼文語言">
+          <button class="language-button active" type="button" data-language="zh">
+            <span>中文</span>
+            <small>繁體中文</small>
+          </button>
+          <button class="language-button" type="button" data-language="th">
+            <span>ไทย</span>
+            <small>ภาษาไทย</small>
+          </button>
+        </div>
+
+        <form id="speakerForm">
+          <fieldset>
+            <legend><span>01</span> 講者照片</legend>
+            <label class="upload-zone" id="uploadZone" for="photoInput">
+              <input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp" />
+              <span class="upload-thumb"><img id="uploadPreview" alt="" /></span>
+              <span class="upload-copy">
+                <strong>上傳或更換頭貼</strong>
+                <small>建議使用正方形、清楚的半身照</small>
+              </span>
+              <span class="upload-action">選擇檔案</span>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>02</span> 講者資訊</legend>
+            <div class="field-grid">
+              <label>
+                <span>選擇講者</span>
+                <select id="speakerName" aria-label="選擇講者"></select>
+              </label>
+              <label>
+                <span>單位｜職稱</span>
+                <textarea id="speakerTitle" rows="2"></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>03</span> 分享主題</legend>
+            <div class="field-grid">
+              <label>
+                <span>場次標籤</span>
+                <input id="sessionLabel" type="text" value="SPEAKER" readonly />
+              </label>
+              <label>
+                <span>演講題目</span>
+                <textarea id="sessionTopic" rows="4"></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <details>
+            <summary>
+              <span><b>04</b> 活動資訊</span>
+              <span class="summary-hint">展開編輯</span>
+            </summary>
+            <div class="details-body field-grid two-columns">
+              <label>
+                <span>日期</span>
+                <input id="eventDate" type="text" />
+              </label>
+              <label>
+                <span>時間</span>
+                <input id="eventTime" type="text" />
+              </label>
+              <label class="full-width">
+                <span>地點</span>
+                <input id="eventVenue" type="text" />
+              </label>
+            </div>
+          </details>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="preview-toolbar">
+          <div>
+            <p class="eyebrow">LIVE PREVIEW</p>
+            <h2 id="preview-title">LinkedIn 貼文預覽</h2>
+          </div>
+          <div class="canvas-size">1080 × 1350 px</div>
+        </div>
+
+        <div class="canvas-stage">
+          <canvas id="postCanvas" width="1080" height="1350" aria-label="貼文預覽"></canvas>
+        </div>
+
+        <div class="action-row">
+          <button class="button button-secondary" id="downloadButton" type="button">
+            <span class="button-icon">↓</span>
+            下載 PNG
+          </button>
+          <button class="button button-primary" id="shareButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M6.5 8.1H2.7V20h3.8V8.1ZM4.6 2a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 4.6 2ZM20 13.2c0-3.6-1.9-5.3-4.5-5.3-2.1 0-3 1.1-3.5 1.9V8.1H8.2V20H12v-5.9c0-1.6.3-3.1 2.3-3.1s2 1.8 2 3.2V20H20v-6.8Z"
+              />
+            </svg>
+            一鍵分享到 LinkedIn
+          </button>
+        </div>
+        <p class="share-note">
+          點擊後會下載圖片、複製預設文案並開啟 LinkedIn。貼上文案後，請點選
+          @RECCESSARY 並從 LinkedIn 清單選取官方專頁完成提及。
+        </p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
