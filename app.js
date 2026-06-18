@@ -50,7 +50,7 @@ const speakers = [
   {
     id: "lobo",
     zh: {
-      name: "游乃潯",
+      name: "游乃溥",
       organization: "金寶電子",
       title: "永續長暨副總經理",
       topic: "品牌商對話：全球品牌如何重構供應鏈韌性與碳契約要求",
