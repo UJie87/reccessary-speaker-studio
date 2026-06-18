@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -16,44 +16,19 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Download website files
-        run: |
-          mkdir -p assets
-          base="https://contracts-delivering-eight-reasons.trycloudflare.com"
-          curl -fsSL "$base/index.html" -o index.html
-          curl -fsSL "$base/styles.css" -o styles.css
-          curl -fsSL "$base/app.js" -o app.js
-          curl -fsSL "$base/README.md" -o README.md
-          curl -fsSL "$base/assets/avatar-placeholder.svg" -o assets/avatar-placeholder.svg
-          curl -fsSL "$base/assets/event-background.jpg" -o assets/event-background.jpg
-          touch .nojekyll
-
-      - name: Save website source to repository
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html styles.css app.js README.md assets .nojekyll
-          git diff --cached --quiet || git commit -m "Add speaker studio website"
-          git push
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: .
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
